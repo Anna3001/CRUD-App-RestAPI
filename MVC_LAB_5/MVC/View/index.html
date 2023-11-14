@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/app/lib/angular.min.js"></script>
+    <script type="module" src="../Controller/controller.js"></script>
+    <script type="module" src="../Controller/getController.js"></script>
+    <script type="module" src="../Controller/deleteController.js"></script>
+    <script type="module" src="../Controller/addController.js"></script>
+    <script type="module" src="../Controller/updateController.js"></script>
+    <title>Movie Database</title>
+</head>
+<body>
+    <div class="container">
+        <div class="part-a">
+            <div class="section" ng-controller="addController">
+                <h2>Add a new movie</h2> 
+                <form id="add-movie-form" ng-submit="addMovie()">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" ng-model="newMovie.title">
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" ng-model="newMovie.director">
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" ng-model="newMovie.country">
+                    <label for="date">Date:</label>
+                    <input type="text" id="date" ng-model="newMovie.date">
+                    <button type="submit">Add</button>
+                </form>
+                <div id="movie-details"></div>
+            </div>
+            <div class="section" ng-controller="updateController">
+                <h2>Update a movie</h2>
+                <form id="update-movie-form" ng-submit="updateMovie()">
+                    <label for="id">ID:</label>
+                    <input type="text" ng-model="updatedMovie.id">
+                    <label for="new-title">New Title:</label>
+                    <input type="text" ng-model="updatedMovie.title">
+                    <label for="new-director">New Director:</label>
+                    <input type="text" ng-model="updatedMovie.director">
+                    <label for="new-country">New Country:</label>
+                    <input type="text" ng-model="updatedMovie.country">
+                    <label for="new-date">New Date:</label>
+                    <input type="text" ng-model="updatedMovie.date">
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+            <div class="section" ng-controller="deleteController">
+                <h2>Delete a movie</h2>
+                <form id="delete-movie-form" ng-submit="deleteById()">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" ng-model="IDdata">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div class="part-b" ng-controller="getController">
+            <div class="section-test">
+                <h2>Get a single film by title and director</h2> 
+                <div class="content">
+                <form id="get-movie-TD" ng-submit="getByTD()">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" ng-model="TDdata.title">
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" ng-model="TDdata.director">
+                    <button type="submit">Get</button>
+                </form>
+                </div>
+            </div>
+            <div class="section-test">
+                <h2>Get a single film by ID</h2>
+                <div class="content"> 
+                    <form ng-submit="getById()" >
+                        <label for="id-get">ID:</label>
+                        <input type="text" id="id-get" ng-model="IDdata.id">
+                        <button type="submit">Get</button>
+                    </form>
+                </div>
+            </div>
+            <div class="section">
+                <form ng-submit="getAll()">
+                <h2>Get all movies</h2>
+                <button type="submit">Get</button>
+                <table ng-controller="tableController">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Director</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="movie in movies">
+                        <td>{{movie.id}}</td>
+                        <td>{{movie.title}}</td>
+                        <td>{{movie.director}}</td>
+                        <td>{{movie.country}}</td>    
+                    </tbody>
+                </table>
+            </form>
+            <div class="button-container" ng-controller="tableButtonsController">
+                    <button ng-click="back()">&#9664;  Back</button>
+                    <button ng-click="next()">Next  &#9654;</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
